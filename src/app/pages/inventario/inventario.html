@@ -1,0 +1,76 @@
+<main class="pagina-inventario">
+  <header class="encabezado">
+    <p class="etiqueta">CONTROL DE EXISTENCIAS</p>
+    <h1>Inventario de insumos</h1>
+    <p>Registra entradas y salidas para mantener tus existencias al día.</p>
+  </header>
+
+  @if (bajos().length) {
+    <aside class="aviso-stock" role="status">
+      <strong>{{ bajos().length }} insumo(s) por debajo del mínimo.</strong>
+      <span>{{ bajosNombres() }}</span>
+    </aside>
+  }
+  @if (mensaje) { <p class="mensaje" role="status">{{ mensaje }}</p> }
+
+  <div class="columnas-inventario">
+    <section class="panel-inventario">
+      <h2>Agregar insumo</h2>
+      <form [formGroup]="formularioInsumo" (ngSubmit)="agregarInsumo()">
+        <label>Nombre<input formControlName="nombre" placeholder="Ej. Semillas de frijol"></label>
+        <label>Categoría
+          <select formControlName="categoria">
+            <option>Semillas</option><option>Fertilizantes</option><option>Herramientas</option><option>Otros</option>
+          </select>
+        </label>
+        <div class="campos-dobles">
+          <label>Existencia inicial<input type="number" min="0" formControlName="cantidad"></label>
+          <label>Unidad<input formControlName="unidad" placeholder="kg, litros, piezas"></label>
+        </div>
+        <label>Mínimo para alerta<input type="number" min="0" formControlName="minimo"></label>
+        <button type="submit">Agregar al inventario</button>
+      </form>
+    </section>
+
+    <section class="panel-inventario">
+      <h2>Registrar movimiento</h2>
+      <form [formGroup]="formularioMovimiento" (ngSubmit)="registrarMovimiento()">
+        <label>Insumo
+          <select formControlName="insumoId">
+            <option [ngValue]="0">Selecciona un insumo</option>
+            @for (item of insumos(); track item.id) {
+              <option [ngValue]="item.id">{{ item.nombre }} ({{ item.cantidad }} {{ item.unidad }})</option>
+            }
+          </select>
+        </label>
+        <label>Tipo de movimiento
+          <select formControlName="tipo"><option>Entrada</option><option>Salida</option><option>Ajuste</option></select>
+        </label>
+        <label>Cantidad<input type="number" min="0.01" step="0.01" formControlName="cantidad"></label>
+        <label>Observación (opcional)<input formControlName="observacion" placeholder="Ej. Uso en parcela norte"></label>
+        <button type="submit">Guardar movimiento</button>
+      </form>
+    </section>
+  </div>
+
+  <section class="lista-insumos" aria-label="Existencias de insumos">
+    <h2>Existencias actuales</h2>
+    @for (item of insumos(); track item.id) {
+      <article class="insumo" [class.stock-bajo]="item.cantidad <= item.minimo">
+        <div class="info-insumo">
+          <span class="categoria">{{ item.categoria }}</span>
+          <h3>{{ item.nombre }}</h3>
+          <p>Mínimo: {{ item.minimo }} {{ item.unidad }}</p>
+          @if (item.movimientos.length) {
+            <small>Último movimiento: {{ item.movimientos[0].tipo }} · {{ item.movimientos[0].fecha }}</small>
+          }
+        </div>
+        <strong class="cantidad">{{ item.cantidad }} <span>{{ item.unidad }}</span></strong>
+        @if (item.cantidad <= item.minimo) { <span class="etiqueta-bajo">Existencia baja</span> }
+        <button class="eliminar" type="button" (click)="eliminarInsumo(item.id)" [attr.aria-label]="'Eliminar ' + item.nombre">Eliminar</button>
+      </article>
+    } @empty {
+      <p class="vacio">Aún no hay insumos. Agrega uno con el formulario.</p>
+    }
+  </section>
+</main>

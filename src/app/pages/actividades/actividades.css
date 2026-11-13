@@ -1,0 +1,323 @@
+.pagina-actividades {
+  box-sizing: border-box;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  color: #263523;
+}
+
+.encabezado {
+  margin-bottom: 28px;
+}
+
+.etiqueta {
+  margin: 0 0 8px;
+  color: #4f7d3a;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.encabezado h1 {
+  margin: 0;
+  color: #29451f;
+  font-size: 36px;
+}
+
+.encabezado > p:last-child {
+  margin: 10px 0 0;
+  color: #596657;
+  font-size: 16px;
+}
+
+.formulario-actividad {
+  margin-bottom: 24px;
+  padding: 24px;
+  border: 1px solid #e0e7db;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 6px 18px rgb(38 53 35 / 7%);
+}
+
+.formulario-actividad h2 {
+  margin: 0;
+  color: #29451f;
+  font-size: 22px;
+}
+
+.formulario-actividad > p {
+  margin: 7px 0 20px;
+  color: #596657;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.campos label {
+  display: grid;
+  gap: 7px;
+  color: #344530;
+  font-weight: 600;
+}
+
+.campos input,
+.campos select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #cbd8c4;
+  border-radius: 8px;
+  background: white;
+  color: #263523;
+  font: inherit;
+  font-weight: 400;
+}
+
+.campos input:focus,
+.campos select:focus {
+  border-color: #4f7d3a;
+  outline: 2px solid #4f7d3a;
+  outline-offset: 1px;
+}
+
+.boton-guardar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #4f7d3a;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-guardar:hover {
+  background: #3b612b;
+}
+
+.lista-actividades {
+  display: grid;
+  gap: 14px;
+}
+
+.actividad {
+  display: grid;
+  grid-template-columns: 52px 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #e0e7db;
+  border-left: 6px solid #4f7d3a;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 6px 18px rgb(38 53 35 / 7%);
+}
+
+.icono {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 12px;
+  background: #edf4e8;
+  color: #4f7d3a;
+}
+
+.actividad:nth-child(2) .icono {
+  background: #f0f5df;
+  color: #6f9132;
+}
+
+.icono mat-icon {
+  font-size: 25px;
+}
+
+.fecha {
+  margin: 0 0 5px;
+  color: #4f7d3a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.detalle h2 {
+  margin: 0 0 5px;
+  color: #29451f;
+  font-size: 18px;
+}
+
+.cultivo {
+  margin: 0;
+  color: #596657;
+}
+
+.estado {
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #edf4e8;
+  color: #3b612b;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.estado-select {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.actividad.vencida {
+  border-left-color: #a33b32;
+}
+
+.aviso-vencida {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 3px 7px;
+  border-radius: 20px;
+  background: #fff1ef;
+  color: #a33b32;
+  font-size: 11px;
+}
+
+.boton-eliminar {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: #fff1ef;
+  color: #a33b32;
+  cursor: pointer;
+}
+
+.boton-eliminar:hover {
+  background: #f9ddda;
+}
+
+.sin-actividades {
+  padding: 20px;
+  border-radius: 12px;
+  background: #f5f8f2;
+  color: #596657;
+}
+
+@media (max-width: 700px) {
+  .pagina-actividades {
+    padding: 32px 16px 48px;
+  }
+
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .actividad {
+    grid-template-columns: 44px 1fr auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .icono {
+    width: 42px;
+    height: 42px;
+  }
+
+  .estado {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .boton-eliminar {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+}
+
+
+
+.pagina-actividades details.formulario-desplegable {
+  margin: 24px 0;
+}
+
+.pagina-actividades details.formulario-desplegable > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #4f7d3a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  box-shadow: 0 4px 10px rgb(38 53 35 / 15%);
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.pagina-actividades details.formulario-desplegable > summary::-webkit-details-marker {
+  display: none;
+}
+
+.pagina-actividades details.formulario-desplegable > summary::before {
+  content: '+';
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 20%);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pagina-actividades details.formulario-desplegable[open] > summary::before {
+  content: '−';
+}
+
+.pagina-actividades details.formulario-desplegable > summary:hover {
+  background: #3b612b;
+  transform: translateY(-1px);
+}
+
+.pagina-actividades details.formulario-desplegable .formulario-actividad {
+  margin-top: 16px;
+}
+
+/* Acentos de la paleta de FarmConnection */
+.pagina-actividades .formulario-actividad {
+  border-top: 4px solid var(--azul-petroleo);
+}
+
+.pagina-actividades .actividad:nth-child(2) {
+  border-left-color: var(--verde);
+}
+
+.pagina-actividades .actividad:nth-child(3) {
+  border-left-color: var(--tierra);
+}
+
+.pagina-actividades .actividad:nth-child(4) {
+  border-left-color: var(--azul-petroleo);
+}
+
+.pagina-actividades .actividad:nth-child(3) .icono {
+  background: #fbf1df;
+  color: var(--tierra);
+}
+
+.pagina-actividades .actividad:nth-child(4) .icono {
+  background: #eaf3f1;
+  color: var(--azul-petroleo);
+}

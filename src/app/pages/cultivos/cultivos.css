@@ -1,0 +1,91 @@
+.contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px;
+}
+
+.bienvenida {
+  margin-bottom: 28px;
+}
+
+.bienvenida > p:first-child {
+  color: #4f7d3a;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.bienvenida h1 {
+  margin: 8px 0;
+  color: #29451f;
+}
+
+.lista-cultivos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-top: 24px;
+}
+
+app-cultivo-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.formulario-desplegable {
+  margin-top: 28px;
+}
+
+.formulario-desplegable > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: #4f7d3a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  box-shadow: 0 4px 10px rgb(38 53 35 / 15%);
+transition: background 160ms ease, transform 160ms ease;}
+
+.formulario-desplegable > summary::-webkit-details-marker {
+  display: none;
+}
+
+.formulario-desplegable > summary::before {
+  content: '+';
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 20%);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.formulario-desplegable[open] > summary {
+  background: #3b612b;
+}
+
+.formulario-desplegable[open] > summary::before {
+  content: '−';
+}
+
+.formulario-desplegable > summary:hover {
+  background: #3b612b;
+  transform: translateY(-1px);
+}
+
+.formulario-desplegable app-formulario-cultivo {
+  display: block;
+  margin-top: 16px;
+}
+
+.bienvenida {
+  padding-left: 16px;
+  border-left: 4px solid var(--azul-petroleo);
+}
+

@@ -1,0 +1,36 @@
+<main class="contenido">
+  <section class="bienvenida">
+    <p>GESTIÓN AGRÍCOLA</p>
+    <h1>Mis cultivos</h1>
+    <p>Consulta y organiza la información de tus cultivos.</p>
+  </section>
+
+  <app-controles-cultivos
+    (buscar)="alBuscar($event)"
+    (ordenarNombre)="ordenarPorNombre()"
+    (ordenarFecha)="ordenarPorFecha()"
+    (invertirLista)="invertirLista()"
+  ></app-controles-cultivos>
+
+  <section class="lista-cultivos">
+    @for (cultivo of cultivosFiltrados(); track cultivo.id) {
+      <app-cultivo-card
+        [cultivo]="cultivo"
+        (editar)="prepararEdicion($event, formularioCultivos)"
+        (eliminar)="eliminarCultivo($event)"
+      ></app-cultivo-card>
+    } @empty {
+      <p>No se encontraron cultivos.</p>
+    }
+  </section>
+
+<details #formularioCultivos class="formulario-desplegable">
+  <summary>{{ cultivoEnEdicion() ? 'Editar cultivo' : 'Agregar un cultivo' }}</summary>
+
+  <app-formulario-cultivo
+    [cultivoEditar]="cultivoEnEdicion()"
+    (cultivoGuardado)="guardarCultivo($event, formularioCultivos)"
+    (cancelarEdicion)="cancelarEdicion(formularioCultivos)"
+  ></app-formulario-cultivo>
+</details>
+</main>

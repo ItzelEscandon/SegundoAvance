@@ -1,0 +1,85 @@
+<section class="formulario-seccion">
+  <h2>{{ cultivoEditar() ? 'Editar cultivo' : 'Registrar cultivo' }}</h2>
+  <p>{{ cultivoEditar() ? 'Actualiza los datos del cultivo.' : 'Agrega un nuevo cultivo a tu registro.' }}</p>
+
+  <form [formGroup]="formulario" (ngSubmit)="guardar()">
+    <div class="campos">
+      <label>
+        Nombre del cultivo
+        <input
+          type="text"
+          formControlName="nombre"
+          placeholder="Ej. Maíz"
+        >
+        @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) {
+          <small>Escribe el nombre del cultivo.</small>
+        }
+      </label>
+
+      <label>
+        Tipo de cultivo
+        <select formControlName="tipo">
+          <option value="">Selecciona un tipo</option>
+          <option value="Grano">Grano</option>
+          <option value="Leguminosa">Leguminosa</option>
+          <option value="Hortaliza">Hortaliza</option>
+          <option value="Fruta">Fruta</option>
+          <option value="Otro">Otro</option>
+        </select>
+        @if (formulario.controls.tipo.touched && formulario.controls.tipo.invalid) {
+          <small>Selecciona un tipo.</small>
+        }
+      </label>
+
+      <label>
+        Variedad
+        <input
+          type="text"
+          formControlName="variedad"
+          placeholder="Ej. Criollo"
+        >
+        @if (formulario.controls.variedad.touched && formulario.controls.variedad.invalid) {
+          <small>Escribe la variedad.</small>
+        }
+      </label>
+
+      <label>
+        Fecha de siembra
+        <input type="date" formControlName="fechaSiembra">
+        @if (formulario.controls.fechaSiembra.touched && formulario.controls.fechaSiembra.invalid) {
+          <small>Selecciona la fecha de siembra.</small>
+        }
+      </label>
+
+      <label>
+        Ubicación
+        <input
+          type="text"
+          formControlName="ubicacion"
+          placeholder="Ej. Parcela norte"
+        >
+        @if (formulario.controls.ubicacion.touched && formulario.controls.ubicacion.invalid) {
+          <small>Escribe la ubicación.</small>
+        }
+      </label>
+
+      <label>
+        Estado
+        <select formControlName="estado">
+          <option value="En preparación">En preparación</option>
+          <option value="En crecimiento">En crecimiento</option>
+          <option value="Listo para cosecha">Listo para cosecha</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="acciones-formulario">
+      <button class="boton-guardar" type="submit">
+        {{ cultivoEditar() ? 'Guardar cambios' : 'Guardar cultivo' }}
+      </button>
+      @if (cultivoEditar()) {
+        <button class="boton-cancelar" type="button" (click)="cancelar()">Cancelar edición</button>
+      }
+    </div>
+  </form>
+</section>

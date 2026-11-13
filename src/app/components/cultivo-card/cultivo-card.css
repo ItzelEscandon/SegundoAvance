@@ -1,0 +1,80 @@
+.tarjeta-cultivo {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  width: 100%;
+  min-height: 150px;
+  overflow: hidden;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px #00000018;
+}
+
+.imagen-cultivo {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  object-fit: cover;
+}
+
+.contenido-tarjeta {
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+.encabezado-tarjeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 8px 7px;
+  color: white;
+  background: #4f7d3a;
+  font-size: 10px;
+}
+
+.encabezado-tarjeta span:last-child {
+  text-align: right;
+}
+
+.contenido-tarjeta h2 {
+  margin: 8px 10px 6px;
+  color: #29451f;
+  font-size: 18px;
+}
+
+.contenido-tarjeta p {
+  margin: 5px 10px;
+  color: #4b5563;
+  font-size: 12px;
+}
+
+.acciones-tarjeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 10px 4px;
+}
+
+.acciones-tarjeta button {
+  padding: 7px 11px;
+  border: 1px solid #4f7d3a;
+  border-radius: 7px;
+  background: white;
+  color: #3b612b;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.acciones-tarjeta button:hover {
+  background: #edf4e8;
+}
+
+.acciones-tarjeta button.eliminar {
+  border-color: #a33b32;
+  color: #a33b32;
+}
+
+.acciones-tarjeta button.eliminar:hover {
+  background: #fff1ef;
+}

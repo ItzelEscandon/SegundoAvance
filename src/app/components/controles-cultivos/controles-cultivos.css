@@ -1,0 +1,45 @@
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.boton-control {
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #4f7d3a;
+  font: inherit;
+  cursor: pointer;
+}
+
+.boton-control:hover {
+  background: #3b612b;
+}
+
+.buscador {
+  box-sizing: border-box;
+  width: 210px;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 1px solid #cbd8c4;
+  border-radius: 8px;
+  color: #263523;
+  background: white;
+  font: inherit;
+}
+
+.buscador::placeholder {
+  color: #748071;
+}
+
+.buscador:focus {
+  border-color: #4f7d3a;
+  outline: 2px solid #4f7d3a;
+  outline-offset: 1px;
+}

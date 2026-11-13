@@ -1,0 +1,111 @@
+<main class="pagina-actividades">
+  <header class="encabezado">
+    <p class="etiqueta">ORGANIZACIÓN DEL CAMPO</p>
+    <h1>Actividades</h1>
+    <p>Programa y consulta las tareas de tus cultivos.</p>
+  </header>
+
+  <details class="formulario-desplegable">
+  <summary>Agregar actividad</summary>
+  <section class="formulario-actividad">
+    <h2>Agregar actividad</h2>
+    <p>Completa los datos y elige un icono para identificarla.</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="guardarActividad()">
+      <div class="campos">
+        <label>
+          Nombre de la actividad
+          <input
+            type="text"
+            formControlName="nombre"
+            placeholder="Ej. Regar el cultivo"
+          />
+        </label>
+
+        <label>
+          Cultivo o parcela
+          <select formControlName="cultivo">
+            <option value="">Selecciona un cultivo o parcela</option>
+            @for (opcion of opcionesCultivo(); track opcion) {
+              <option [value]="opcion">{{ opcion }}</option>
+            }
+          </select>
+        </label>
+
+        <label>
+          Fecha
+          <input type="date" formControlName="fecha" />
+        </label>
+
+        <label>
+          Estado
+          <select formControlName="estado">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Completada">Completada</option>
+          </select>
+        </label>
+
+        <label>
+          Icono
+          <select formControlName="icono">
+            <option value="water_drop">Riego</option>
+            <option value="eco">Revisión del cultivo</option>
+            <option value="agriculture">Trabajo de campo</option>
+            <option value="event_available">Registro o planificación</option>
+          </select>
+        </label>
+      </div>
+
+      <button class="boton-guardar" type="submit">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        Agregar actividad
+      </button>
+    </form>
+  </section>
+  </details>
+
+  <section class="lista-actividades" aria-label="Lista de actividades">
+    @for (actividad of actividades(); track actividad.id) {
+      <article class="actividad" [class.vencida]="actividad.estado !== 'Completada' && actividad.fecha < fechaHoy">
+        <div class="icono">
+          <mat-icon aria-hidden="true">{{ actividad.icono }}</mat-icon>
+        </div>
+
+        <div class="detalle">
+          <p class="fecha">
+            {{ actividad.fecha }}
+            @if (actividad.estado !== 'Completada' && actividad.fecha < fechaHoy) {
+              <span class="aviso-vencida">Atrasada</span>
+            }
+          </p>
+          <h2>{{ actividad.nombre }}</h2>
+          <p class="cultivo">{{ actividad.cultivo }}</p>
+        </div>
+
+        <select
+          class="estado estado-select"
+          [value]="actividad.estado"
+          [attr.aria-label]="'Estado de ' + actividad.nombre"
+          (change)="cambiarEstado(actividad.id, $any($event.target).value)"
+        >
+          <option value="Pendiente">Pendiente</option>
+          <option value="En proceso">En proceso</option>
+          <option value="Completada">Completada</option>
+        </select>
+
+        <button
+          class="boton-eliminar"
+          type="button"
+          aria-label="Eliminar actividad"
+          title="Eliminar actividad"
+          (click)="eliminarActividad(actividad.id)"
+        >
+          <mat-icon aria-hidden="true">delete</mat-icon>
+        </button>
+      </article>
+    } @empty {
+      <p class="sin-actividades">No hay actividades. Agrega una con el formulario.</p>
+    }
+  </section>
+</main>

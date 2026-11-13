@@ -1,0 +1,117 @@
+<main class="dashboard">
+  <header class="encabezado">
+    <p class="etiqueta">RESUMEN GENERAL</p>
+    <h1>Dashboard</h1>
+    <p>Consulta cultivos, tareas, existencias y resultados de producción.</p>
+  </header>
+
+  <section class="resumen" aria-label="Resumen de cultivos">
+    <article class="tarjeta-resumen">
+      <span class="icono">
+        <mat-icon aria-hidden="true">agriculture</mat-icon>
+      </span>
+      <p>Total de cultivos</p>
+      <strong>{{ totalCultivos() }}</strong>
+    </article>
+
+    <article class="tarjeta-resumen">
+      <span class="icono">
+        <mat-icon aria-hidden="true">eco</mat-icon>
+      </span>
+      <p>En crecimiento</p>
+      <strong>{{ enCrecimiento() }}</strong>
+    </article>
+
+    <article class="tarjeta-resumen">
+      <span class="icono">
+        <mat-icon aria-hidden="true">construction</mat-icon>
+      </span>
+      <p>Preparación del terreno</p>
+      <strong>{{ enPreparacion() }}</strong>
+    </article>
+
+    <article class="tarjeta-resumen">
+      <span class="icono"><mat-icon aria-hidden="true">event_note</mat-icon></span>
+      <p>Actividades pendientes</p>
+      <strong>{{ actividadesPendientes().length }}</strong>
+    </article>
+
+    <article class="tarjeta-resumen" [class.tarjeta-alerta]="insumosBajos().length > 0">
+      <span class="icono"><mat-icon aria-hidden="true">inventory_2</mat-icon></span>
+      <p>Insumos bajos</p>
+      <strong>{{ insumosBajos().length }}</strong>
+    </article>
+
+    <article class="tarjeta-resumen">
+      <span class="icono"><mat-icon aria-hidden="true">spa</mat-icon></span>
+      <p>Cosechas registradas</p>
+      <strong>{{ cosechas().length }}</strong>
+    </article>
+  </section>
+
+  <section class="panel-alertas" aria-label="Alertas de seguimiento">
+    <div class="titulo-seccion">
+      <div><h2>Alertas de seguimiento</h2><p>Actividades próximas, atrasadas e insumos por reponer.</p></div>
+      <a routerLink="/actividades">Ver actividades</a>
+    </div>
+    <div class="grupos-alerta">
+      <article class="grupo-alerta atrasadas">
+        <h3>Atrasadas <span>{{ actividadesAtrasadas().length }}</span></h3>
+        @for (actividad of actividadesAtrasadas(); track actividad.id) {
+          <p><strong>{{ actividad.nombre }}</strong> · {{ actividad.cultivo }} · {{ actividad.fecha }}</p>
+        } @empty { <p>No hay actividades atrasadas.</p> }
+      </article>
+      <article class="grupo-alerta proximas">
+        <h3>Próximos 7 días <span>{{ actividadesProximas().length }}</span></h3>
+        @for (actividad of actividadesProximas(); track actividad.id) {
+          <p><strong>{{ actividad.nombre }}</strong> · {{ actividad.cultivo }} · {{ actividad.fecha }}</p>
+        } @empty { <p>No hay actividades próximas.</p> }
+      </article>
+      <article class="grupo-alerta stock">
+        <h3>Existencias bajas <span>{{ insumosBajos().length }}</span></h3>
+        @for (insumo of insumosBajos(); track insumo.id) {
+          <p><strong>{{ insumo.nombre }}</strong> · {{ insumo.cantidad }} {{ insumo.unidad }} (mínimo {{ insumo.minimo }})</p>
+        } @empty { <p>Todos los insumos están sobre el mínimo.</p> }
+        <a routerLink="/inventario">Abrir inventario</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="recientes">
+    <div class="titulo-seccion">
+      <div>
+        <h2>Siembras recientes</h2>
+        <p>Los cultivos con fecha de siembra más nueva.</p>
+      </div>
+    </div>
+
+    <div class="lista-recientes">
+      @for (cultivo of recientes(); track cultivo.id) {
+        <article class="cultivo-reciente">
+          <div>
+            <h3>{{ cultivo.nombre }}</h3>
+            <p>{{ cultivo.tipo }} · {{ cultivo.ubicacion }}</p>
+          </div>
+          <time>{{ cultivo.fechaSiembra }}</time>
+        </article>
+      } @empty {
+        <p class="sin-cultivos">Todavía no hay cultivos registrados.</p>
+      }
+    </div>
+  </section>
+
+  <section class="recientes">
+    <div class="titulo-seccion">
+      <div><h2>Cosechas recientes</h2><p>Últimos resultados registrados por cultivo.</p></div>
+      <a routerLink="/cosechas">Registrar cosecha</a>
+    </div>
+    <div class="lista-recientes">
+      @for (cosecha of cosechasRecientes(); track cosecha.id) {
+        <article class="cultivo-reciente">
+          <div><h3>{{ cosecha.cultivo }}</h3><p>Calidad {{ cosecha.calidad }}</p></div>
+          <time>{{ cosecha.cantidad | number:'1.0-2' }} {{ cosecha.unidad }} · {{ cosecha.fecha }}</time>
+        </article>
+      } @empty { <p class="sin-cultivos">Aún no hay cosechas registradas.</p> }
+    </div>
+  </section>
+</main>

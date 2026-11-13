@@ -1,0 +1,57 @@
+<main class="pagina-cosechas">
+  <header class="encabezado">
+    <p class="etiqueta">RESULTADOS DE PRODUCCIÓN</p>
+    <h1>Cosechas</h1>
+    <p>Registra la producción obtenida para conservar el historial de cada cultivo.</p>
+  </header>
+
+  <section class="resumen-cosecha">
+    <span>Kilos registrados</span>
+    <strong>{{ totalKilos() | number:'1.0-2' }} kg</strong>
+    <small>Solo suma los registros cuya unidad está en kilogramos.</small>
+  </section>
+
+  @if (mensaje) { <p class="mensaje" role="status">{{ mensaje }}</p> }
+
+  <details class="formulario-desplegable">
+    <summary>Registrar cosecha</summary>
+    <section class="panel-cosecha">
+      <form [formGroup]="formulario" (ngSubmit)="guardar()">
+        <div class="campos-cosecha">
+          <label>Cultivo
+            <select formControlName="cultivoId">
+              <option [ngValue]="0">Selecciona un cultivo</option>
+              @for (cultivo of cultivos(); track cultivo.id) {
+                <option [ngValue]="cultivo.id">{{ cultivo.nombre }} · {{ cultivo.ubicacion }}</option>
+              }
+            </select>
+          </label>
+          <label>Fecha de cosecha<input type="date" formControlName="fecha"></label>
+          <label>Cantidad<input type="number" min="0.01" step="0.01" formControlName="cantidad"></label>
+          <label>Unidad<select formControlName="unidad"><option value="kg">kg</option><option value="toneladas">toneladas</option><option value="cajas">cajas</option><option value="piezas">piezas</option></select></label>
+          <label>Calidad<select formControlName="calidad"><option>Excelente</option><option>Buena</option><option>Regular</option></select></label>
+          <label>Foto (URL opcional)<input type="url" formControlName="imagen" placeholder="https://..."></label>
+          <label class="campo-amplio">Observaciones<textarea rows="3" formControlName="observaciones" placeholder="Notas sobre la cosecha"></textarea></label>
+        </div>
+        <button class="boton-guardar" type="submit">Guardar cosecha</button>
+      </form>
+    </section>
+  </details>
+
+  <section class="lista-cosechas" aria-label="Historial de cosechas">
+    @for (item of cosechas(); track item.id) {
+      <article class="tarjeta-cosecha">
+        @if (item.imagen) { <img [src]="item.imagen" [alt]="'Evidencia de ' + item.cultivo" loading="lazy"> }
+        <div class="detalle-cosecha">
+          <span class="fecha">{{ item.fecha }}</span>
+          <h2>{{ item.cultivo }}</h2>
+          <p class="cantidad">{{ item.cantidad }} {{ item.unidad }} · Calidad {{ item.calidad }}</p>
+          @if (item.observaciones) { <p>{{ item.observaciones }}</p> }
+        </div>
+        <button type="button" class="eliminar" (click)="eliminar(item.id)">Eliminar</button>
+      </article>
+    } @empty {
+      <p class="vacio">Aún no hay cosechas registradas.</p>
+    }
+  </section>
+</main>

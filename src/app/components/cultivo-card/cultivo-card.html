@@ -1,0 +1,24 @@
+<article class="tarjeta-cultivo">
+  <img
+    class="imagen-cultivo"
+    [src]="cultivo().imagen"
+    [alt]="'Cultivo de ' + cultivo().nombre"
+  >
+
+  <div class="contenido-tarjeta">
+    <div class="encabezado-tarjeta">
+      <span>{{ cultivo().tipo }}</span>
+      <span>{{ cultivo().estado }}</span>
+    </div>
+
+    <h2>{{ cultivo().nombre }}</h2>
+    <p><strong>Variedad:</strong> {{ cultivo().variedad }}</p>
+    <p><strong>Siembra:</strong> {{ cultivo().fechaSiembra }}</p>
+    <p><strong>Ubicación:</strong> {{ cultivo().ubicacion }}</p>
+
+    <div class="acciones-tarjeta">
+      <button type="button" (click)="editar.emit(cultivo())">Editar</button>
+      <button type="button" class="eliminar" (click)="eliminar.emit(cultivo().id)">Eliminar</button>
+    </div>
+  </div>
+</article>

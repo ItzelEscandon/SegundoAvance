@@ -1,0 +1,21 @@
+<div class="controles">
+  <input
+    class="buscador"
+    type="search"
+    placeholder="Buscar cultivo..."
+    aria-label="Buscar cultivo por nombre"
+    (input)="alBuscar($event)"
+  />
+
+  <button class="boton-control" (click)="alOrdenarNombre()">
+    Ordenar por nombre
+  </button>
+
+  <button class="boton-control" (click)="alOrdenarFecha()">
+    Ordenar por fecha
+  </button>
+
+  <button class="boton-control" (click)="alInvertirLista()">
+    Invertir lista
+  </button>
+</div>
